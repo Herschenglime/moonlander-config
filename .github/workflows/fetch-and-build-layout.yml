@@ -94,7 +94,7 @@ jobs:
           # Build the layout
           docker run -v ./qmk_firmware:/root --rm qmk /bin/sh -c "
             qmk setup zsa/qmk_firmware -b firmware${{ steps.download-layout-source.outputs.firmware_version }} -y
-            make ${make_prefix}${{ github.event.inputs.layout_geometry }}:${{ github.event.inputs.layout_id }}
+            make ${make_prefix}${{ github.event.inputs.layout_geometry }}\:${{ github.event.inputs.layout_id }}
           "
           
           # Find and export built layout          
