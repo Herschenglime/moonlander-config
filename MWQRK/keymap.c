@@ -159,20 +159,21 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 // swapper state boolean
-bool sw_win_active = false;
+bool sw_win_fwd_active = false;
+bool sw_win_back_active = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // for forwards alt tab
   update_swapper(
-      &sw_win_active, KC_LALT, KC_TAB, SW_WIN_FWD,
+      &sw_win_fwd_active, KC_LALT, KC_TAB, SW_WIN_FWD,
       keycode, record
   );
 
   // for backwards alt tab
-  /* update_swapper( */
-  /*     &sw_win_active, KC_LALT, LSFT(KC_TAB), SW_WIN_BACK, */
-  /*     keycode, record */
-  /* ); */
+  update_swapper(
+      &sw_win_back_active, KC_LALT, LSFT(KC_TAB), SW_WIN_BACK,
+      keycode, record
+  );
 
   switch (keycode) {
     case RGB_SLD:
