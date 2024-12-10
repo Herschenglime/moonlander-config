@@ -41,7 +41,7 @@ git push
 # Merge Oryx with custom QMK
 git fetch origin main
 git checkout -B main origin/main
-git merge -Xignore-all-space oryx || echo "merge failed, fix it" && exit
+git merge -Xignore-all-space oryx || $(echo "merge failed, fix it" && exit)
 git push
 
 # Checkout the right firmware branch - don't do this every time for speed
@@ -75,10 +75,5 @@ built_layout_file=$(find ~/qmk_firmware -maxdepth 1 -type f -regex ".*${normaliz
 echo built_layout_file="$built_layout_file"
 echo normalized_layout_geometry=${normalized_layout_geometry}
 
-# offer to flash with wally
-read -p "Want to flash with Wally?" -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-  wally-cli $built_layout_file
-fi
+# flash with wally
+wally-cli $built_layout_file
