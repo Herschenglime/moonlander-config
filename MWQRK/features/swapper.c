@@ -1,4 +1,5 @@
 #include "swapper.h"
+#include "song_list.h"
 
 void update_swapper(
     bool *active,
@@ -21,6 +22,8 @@ void update_swapper(
         }
     } else if (*active) {
         unregister_code(cmdish);
+        // play a song when cmdish gets released
+        PLAY_SONG(MAJOR_SOUND);
         *active = false;
     }
 }

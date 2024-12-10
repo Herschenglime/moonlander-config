@@ -11,3 +11,5 @@ COMBO_ENABLE = yes
 
 # add callum swapper feature
 SRC += features/swapper.c
+
+AUDIO_ENABLE = yes
