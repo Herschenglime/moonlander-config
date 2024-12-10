@@ -4,7 +4,7 @@ set -e # exit on error instead of continuing
 # turn this into a nix thing later if I get a ton of time - would fix the annoyances of shell script and skip the need for docker
 
 # commit unstaged changes right away to streamline dev process
-git commit -a -m "some local changes"
+git commit -a -m "some local changes" || echo "No new local changes"
 git push
 
 # set layout id and geometry - modify here to be default
