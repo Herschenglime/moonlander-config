@@ -8,3 +8,6 @@ ORYX_ENABLE = yes
 RGB_MATRIX_CUSTOM_KB = yes
 SPACE_CADET_ENABLE = no
 COMBO_ENABLE = yes
+
+# add callum swapper feature
+SRC += features/swapper.c
