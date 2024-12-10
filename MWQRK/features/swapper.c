@@ -23,7 +23,7 @@ void update_swapper(
     } else if (*active) {
         unregister_code(cmdish);
         // play a song when cmdish gets released
-        PLAY_SONG(GUITAR_SOUND);
+        PLAY_SONG(SONG(GUITAR_SOUND));
         *active = false;
     }
 }
