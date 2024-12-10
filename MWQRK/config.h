@@ -17,6 +17,8 @@
 #define SERIAL_NUMBER "MWQRK/3KVjG"
 #define LAYER_STATE_8BIT
 #define COMBO_COUNT 16
+// only trigger combos from base layer's keymap, should work anywhere
+#define COMBO_ONLY_FROM_LAYER 0
 
 #define RGB_MATRIX_STARTUP_SPD 60
 
