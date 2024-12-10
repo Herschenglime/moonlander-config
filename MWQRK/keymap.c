@@ -67,6 +67,8 @@ const uint16_t PROGMEM combo13[] = { KC_M, KC_N, COMBO_END};
 const uint16_t PROGMEM combo14[] = { KC_N, KC_E, KC_I, COMBO_END};
 const uint16_t PROGMEM combo15[] = { MT(MOD_LCTL, KC_ESCAPE), MT(MOD_LALT, KC_TAB), MT(MOD_LGUI, KC_ENTER), MT(MOD_LSFT, KC_SPACE), COMBO_END};
 const uint16_t PROGMEM combo16[] = { MT(MOD_LSFT, KC_SPACE), MT(MOD_LGUI, KC_ENTER), COMBO_END};
+const uint16_t PROGMEM combo17[] = { KC_D, KC_V, COMBO_END};
+const uint16_t PROGMEM combo18[] = { KC_K, KC_H, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, KC_BSPC),
@@ -86,6 +88,8 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo14, LGUI(KC_ENTER)),
     COMBO(combo15, LGUI(LCTL(KC_ENTER))),
     COMBO_ACTION(combo16),
+    COMBO(combo17, KC_UNDS),
+    COMBO(combo18, KC_PLUS),
 };
 
 extern rgb_config_t rgb_matrix_config;

@@ -13,14 +13,14 @@
 #undef RGB_MATRIX_TIMEOUT
 #define RGB_MATRIX_TIMEOUT 300000
 
+// only trigger combos from base layer's keymap, should work anywhere
+#define COMBO_ONLY_FROM_LAYER 0
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define AUTO_SHIFT_TIMEOUT 140
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "MWQRK/Grejj"
+#define SERIAL_NUMBER "MWQRK/EGYqD"
 #define LAYER_STATE_8BIT
-#define COMBO_COUNT 17
-// only trigger combos from base layer's keymap, should work anywhere
-#define COMBO_ONLY_FROM_LAYER 0
+#define COMBO_COUNT 19
 
 #define RGB_MATRIX_STARTUP_SPD 60
 

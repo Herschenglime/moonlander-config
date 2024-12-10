@@ -41,7 +41,7 @@ git push
 # Merge Oryx with custom QMK
 git fetch origin main
 git checkout -B main origin/main
-git merge -Xignore-all-space oryx
+git merge -Xignore-all-space oryx || echo "merge failed, fix it" && exit
 git push
 
 # Checkout the right firmware branch - don't do this every time for speed
