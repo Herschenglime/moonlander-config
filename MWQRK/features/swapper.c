@@ -7,7 +7,7 @@ void update_swapper(
     uint16_t trigger,
     uint16_t keycode,
     keyrecord_t *record,
-    uint16_t modifier = KC_NO
+    uint16_t modifier
 ) {
     if (keycode == trigger) {
         if (record->event.pressed) {
