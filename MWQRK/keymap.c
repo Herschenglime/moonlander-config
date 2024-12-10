@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_A,           KC_R,           KC_S,           KC_T,           KC_G,           KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_M,           KC_N,           KC_E,           KC_I,           KC_O,           KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_Z,           KC_X,           KC_C,           KC_D,           KC_V,                                           KC_K,           KC_H,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, OSL(3),         TG(1),                                                                                                          TG(1),          OSL(2),         KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       
-    KC_SPACE,       MT(MOD_LCTL, KC_ESCAPE),KC_TRANSPARENT,                 KC_TRANSPARENT, MT(MOD_LALT, KC_TAB),MT(MOD_LGUI, KC_ENTER)
+    MT(MOD_LSFT, KC_SPACE),MT(MOD_LCTL, KC_ESCAPE),KC_TRANSPARENT,                 KC_TRANSPARENT, MT(MOD_LALT, KC_TAB),MT(MOD_LGUI, KC_ENTER)
   ),
   [1] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -65,7 +65,8 @@ const uint16_t PROGMEM combo11[] = { KC_U, KC_Y, COMBO_END};
 const uint16_t PROGMEM combo12[] = { KC_T, KC_G, COMBO_END};
 const uint16_t PROGMEM combo13[] = { KC_M, KC_N, COMBO_END};
 const uint16_t PROGMEM combo14[] = { KC_N, KC_E, KC_I, COMBO_END};
-const uint16_t PROGMEM combo15[] = { KC_SPACE, MT(MOD_LCTL, KC_ESCAPE), MT(MOD_LALT, KC_TAB), MT(MOD_LGUI, KC_ENTER), COMBO_END};
+const uint16_t PROGMEM combo15[] = { MT(MOD_LCTL, KC_ESCAPE), MT(MOD_LALT, KC_TAB), MT(MOD_LGUI, KC_ENTER), MT(MOD_LSFT, KC_SPACE), COMBO_END};
+const uint16_t PROGMEM combo16[] = { MT(MOD_LSFT, KC_SPACE), MT(MOD_LGUI, KC_ENTER), COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, KC_BSPC),
@@ -84,6 +85,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo13, KC_EQUAL),
     COMBO(combo14, LGUI(KC_ENTER)),
     COMBO(combo15, LGUI(LCTL(KC_ENTER))),
+    COMBO(combo16, KC_CAPS),
 };
 
 extern rgb_config_t rgb_matrix_config;
