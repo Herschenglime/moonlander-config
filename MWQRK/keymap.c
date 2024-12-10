@@ -162,6 +162,7 @@ bool rgb_matrix_indicators_user(void) {
 
 // swapper state boolean
 bool sw_win_active = false;
+bool sw_wspc_active = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // handle alt tab and alt shift tab in swapper
@@ -171,7 +172,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   );
   // mod tab for paperwm workspaces
   update_swapper(
-      &sw_win_active, KC_LGUI, KC_TAB, SW_WSPC_FWD, SW_WSPC_BACK, KC_LSFT,
+      &sw_wspc_active, KC_LGUI, KC_TAB, SW_WSPC_FWD, SW_WSPC_BACK, KC_LSFT,
       keycode, record
   );
   switch (keycode) {
