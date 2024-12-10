@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
+#include "swapper.h"
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
 
@@ -161,19 +162,19 @@ bool rgb_matrix_indicators_user(void) {
 bool sw_win_active = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // for forwards alt tab
+  update_swapper(
+      &sw_win_active, KC_LALT, KC_TAB, SW_WIN_FWD,
+      keycode, record
+  );
+
+  // for backwards alt tab
+  update_swapper(
+      &sw_win_active, KC_LALT, LSFT(KC_TAB), SW_WIN_BACK,
+      keycode, record
+  );
+
   switch (keycode) {
-    // for forwards alt tab
-    update_swapper(
-        &sw_win_active, KC_LALT, KC_TAB, SW_WIN_FWD,
-        keycode, record
-    );
-
-    // for backwards alt tab
-    update_swapper(
-        &sw_win_active, KC_LALT, LSFT(KC_TAB), SW_WIN_BACK,
-        keycode, record
-    );
-
     case RGB_SLD:
         if (rawhid_state.rgb_control) {
             return false;
