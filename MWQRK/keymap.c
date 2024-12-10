@@ -170,8 +170,8 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
     // convenience
     switch (index) {
       // editor summon and caps word
-      case combo15:
-      case combo16:
+      case 15:
+      case 16:
         return true;
     }
     return false;
@@ -180,7 +180,7 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
 //caps word combo activation
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch(combo_index) {
-    case combo16:
+    case 16:
       if (pressed) {
         caps_word_on();  // Activate Caps Word!
       }
