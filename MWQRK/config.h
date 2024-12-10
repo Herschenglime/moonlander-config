@@ -8,7 +8,7 @@
 
 #define PERMISSIVE_HOLD
 
-#define COMBO_TERM 40
+#define COMBO_TERM 15
 
 #undef RGB_MATRIX_TIMEOUT
 #define RGB_MATRIX_TIMEOUT 300000
@@ -16,7 +16,7 @@
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define AUTO_SHIFT_TIMEOUT 140
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "MWQRK/OjzXJ"
+#define SERIAL_NUMBER "MWQRK/Grejj"
 #define LAYER_STATE_8BIT
 #define COMBO_COUNT 17
 // only trigger combos from base layer's keymap, should work anywhere
