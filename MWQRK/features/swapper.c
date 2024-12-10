@@ -1,6 +1,7 @@
 #include "swapper.h"
 #include "song_list.h"
-float hold_end[][2] = SONG(GUITAR_SOUND);
+float hold_start[][2] = SONG(MAJOR_SOUND);
+float hold_end[][2] = SONG(MINOR_SOUND);
 
 void update_swapper(
     bool *active,
