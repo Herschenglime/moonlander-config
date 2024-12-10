@@ -169,10 +169,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   );
 
   // for backwards alt tab
-  update_swapper(
-      &sw_win_active, KC_LALT, LSFT(KC_TAB), SW_WIN_BACK,
-      keycode, record
-  );
+  /* update_swapper( */
+  /*     &sw_win_active, KC_LALT, LSFT(KC_TAB), SW_WIN_BACK, */
+  /*     keycode, record */
+  /* ); */
 
   switch (keycode) {
     case RGB_SLD:
