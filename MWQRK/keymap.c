@@ -166,7 +166,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // for forwards alt tab
   update_swapper(
       &sw_win_fwd_active, KC_LALT, KC_TAB, SW_WIN_FWD,
-      keycode, record
+      keycode, record, KC_NO
   );
 
   // for backwards alt tab - includes extra modifier param to do backtab
