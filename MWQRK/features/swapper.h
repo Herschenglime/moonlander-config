@@ -10,11 +10,15 @@
 //     nav down, trigger, nav up -> nav down, cmd down, tab, cmd up, nav up
 //
 // This behaviour is useful for more than just cmd-tab, hence: cmdish, tabish.
+//
+// Extended with optional modifier (for implementing shift tab, eg)
 void update_swapper(
     bool *active,
     uint16_t cmdish,
     uint16_t tabish,
     uint16_t trigger,
     uint16_t keycode,
-    keyrecord_t *record
+    keyrecord_t *record,
+    uint16_t modifier = KC_NO
 );
+

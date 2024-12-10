@@ -6,7 +6,8 @@ void update_swapper(
     uint16_t tabish,
     uint16_t trigger,
     uint16_t keycode,
-    keyrecord_t *record
+    keyrecord_t *record,
+    uint16_t modifier = KC_NO
 ) {
     if (keycode == trigger) {
         if (record->event.pressed) {
@@ -14,7 +15,9 @@ void update_swapper(
                 *active = true;
                 register_code(cmdish);
             }
+            register_code(modifier);
             register_code(tabish);
+            unregister_code(modifier);
         } else {
             unregister_code(tabish);
             // Don't unregister cmdish until some other key is hit or released.
