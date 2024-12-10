@@ -14,6 +14,7 @@ void update_swapper(
     if (keycode == trigger) {
         if (record->event.pressed) {
             if (!*active) {
+                PLAY_SONG(hold_start);
                 *active = true;
                 register_code(cmdish);
             }
