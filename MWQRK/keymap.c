@@ -66,6 +66,7 @@ const uint16_t PROGMEM combo12[] = { KC_T, KC_G, COMBO_END};
 const uint16_t PROGMEM combo13[] = { KC_M, KC_N, COMBO_END};
 const uint16_t PROGMEM combo14[] = { KC_N, KC_E, KC_I, COMBO_END};
 const uint16_t PROGMEM combo15[] = { KC_SPACE, MT(MOD_LCTL, KC_ESCAPE), MT(MOD_LALT, KC_TAB), MT(MOD_LGUI, KC_ENTER), COMBO_END};
+const uint16_t PROGMEM combo16[] = { MT(MOD_LSFT, KC_SPACE), MT(MOD_LGUI, KC_ENTER), COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, KC_BSPC),
@@ -84,6 +85,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo13, KC_EQUAL),
     COMBO(combo14, LGUI(KC_ENTER)),
     COMBO(combo15, LGUI(LCTL(KC_ENTER))),
+    COMBO_ACTION(combo16),
 };
 
 extern rgb_config_t rgb_matrix_config;
@@ -163,4 +165,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
+bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+    //these combos need to be tapped to activate - use oryx numbering for
+    // convenience
+    switch (index) {
+      // editor summon and caps word
+      case combo15:
+      case combo16:
+        return true;
+    }
+    return false;
+}
 
+//caps word combo activation
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case combo16:
+      if (pressed) {
+        caps_word_on();  // Activate Caps Word!
+      }
+      break;
+
+    // Other combos...
+  }
+}
