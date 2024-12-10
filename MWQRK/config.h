@@ -13,8 +13,6 @@
 #undef RGB_MATRIX_TIMEOUT
 #define RGB_MATRIX_TIMEOUT 300000
 
-// only trigger combos from base layer's keymap, should work anywhere
-#define COMBO_ONLY_FROM_LAYER 0
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define AUTO_SHIFT_TIMEOUT 140
 #define CAPS_LOCK_STATUS

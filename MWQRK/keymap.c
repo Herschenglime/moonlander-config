@@ -87,7 +87,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo13, KC_EQUAL),
     COMBO(combo14, LGUI(KC_ENTER)),
     COMBO(combo15, LGUI(LCTL(KC_ENTER))),
-    COMBO_ACTION(combo16),
+    COMBO(combo16, KC_CAPS),
     COMBO(combo17, KC_UNDS),
     COMBO(combo18, KC_PLUS),
 };
@@ -169,27 +169,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-bool get_combo_must_tap(uint16_t index, combo_t *combo) {
-    //these combos need to be tapped to activate - use oryx numbering for
-    // convenience
-    switch (index) {
-      // editor summon and caps word
-      case 15:
-      case 16:
-        return true;
-    }
-    return false;
-}
 
-//caps word combo activation
-void process_combo_event(uint16_t combo_index, bool pressed) {
-  switch(combo_index) {
-    case 16:
-      if (pressed) {
-        caps_word_on();  // Activate Caps Word!
-      }
-      break;
-
-    // Other combos...
-  }
-}
