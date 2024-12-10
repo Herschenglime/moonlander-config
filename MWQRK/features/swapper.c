@@ -1,7 +1,4 @@
 #include "swapper.h"
-#include "song_list.h"
-float hold_start[][2] = SONG(MAJOR_SOUND);
-float hold_end[][2] = SONG(MINOR_SOUND);
 
 void update_swapper(
     bool *active,
@@ -14,7 +11,6 @@ void update_swapper(
     if (keycode == trigger) {
         if (record->event.pressed) {
             if (!*active) {
-                PLAY_SONG(hold_start);
                 *active = true;
                 register_code(cmdish);
             }
@@ -25,8 +21,6 @@ void update_swapper(
         }
     } else if (*active) {
         unregister_code(cmdish);
-        // play a song when cmdish gets released
-        PLAY_SONG(hold_end);
         *active = false;
     }
 }

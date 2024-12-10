@@ -62,7 +62,7 @@ else
   make_prefix=""
 fi
 
-# Copy layout files to the qmk folder
+# Copy layout files to the qmk folder, overwriting if present (make builds quicker)
 rm -rf ${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}
 mkdir -p ${keyboard_directory}/${layout_geometry}/keymaps && cp -r ${layout_path} "$_"
 
