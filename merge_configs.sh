@@ -5,6 +5,7 @@ set -e # exit on error instead of continuing
 
 # commit unstaged changes right away to streamline dev process
 git commit -a -m "some local changes"
+git push
 
 # set layout id and geometry - modify here to be default
 layout_id="MWQRK"
