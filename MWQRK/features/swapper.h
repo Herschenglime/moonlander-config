@@ -11,14 +11,14 @@
 //
 // This behaviour is useful for more than just cmd-tab, hence: cmdish, tabish.
 //
-// Extended with optional modifier (for implementing shift tab, eg)
+// Extended with forward and back keycodes and a modifier to allow handling shift tab forwards and backwards in an intuitive way
 void update_swapper(
     bool *active,
     uint16_t cmdish,
     uint16_t tabish,
-    uint16_t trigger,
+    uint16_t forward,
+    uint16_t back,
+    uint16_t modifier,
     uint16_t keycode,
-    keyrecord_t *record,
-    uint16_t modifier
+    keyrecord_t *record
 );
-

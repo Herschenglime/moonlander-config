@@ -159,22 +159,14 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 // swapper state boolean
-bool sw_win_fwd_active = false;
-bool sw_win_back_active = false;
+bool sw_win_active = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  // for forwards alt tab
+  // handle alt tab and alt shift tab in swapper
   update_swapper(
-      &sw_win_fwd_active, KC_LALT, KC_TAB, SW_WIN_FWD,
-      keycode, record, KC_NO
+      &sw_win_active, KC_LALT, KC_TAB, SW_WIN_FWD, SW_WIN_BACK, KC_LSFT,
+      keycode, record
   );
-
-  // for backwards alt tab - includes extra modifier param to do backtab
-  update_swapper(
-      &sw_win_back_active, (KC_LALT), KC_TAB, SW_WIN_BACK,
-      keycode, record, KC_LSFT
-  );
-
   switch (keycode) {
     case RGB_SLD:
         if (rawhid_state.rgb_control) {
