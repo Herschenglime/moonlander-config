@@ -231,16 +231,16 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
     }
   }
 
-  // both sides have home row mods, do not fire any of them
-  else if (layer_state_is(NUM)) {
-    switch (combo_index) {
-      case 0:
-      case 3:
-      case 6:
-      case 9:
-        return false;
-    }
-  }
+  // num layer had mods removed, so this is unneeded (for now)
+  /* else if (layer_state_is(NUM)) { */
+  /*   switch (combo_index) { */
+  /*     case 0: */
+  /*     case 3: */
+  /*     case 6: */
+  /*     case 9: */
+  /*       return false; */
+  /*   } */
+  /* } */
 
   // otherwise let the combo pass
   return true;
