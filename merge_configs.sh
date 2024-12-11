@@ -19,7 +19,7 @@ git pull
 
 # Download layout source
 # hardcode geometry and layout_id for now, will fix when turning into nix expression
-response=$(curl --location 'https://oryx.zsa.io/graphql' --header 'Content-Type: application/json' --data '{"query":"query getLayout($hashId: String!, $revisionId: String!, $geometry: String) {layout(hashId: $hashId, geometry: $geometry, revisionId: $revisionId) {  revision { hashId, qmkVersion, title }}}","variables":{"hashId":"MWQRK","geometry":"moonlander","revisionId":"latest"}}' | jq '.data.layout.revision | [.hashId, .qmkVersion, .title]')
+response=$(curl --location 'https://oryx.zsa.io/graphql' --header 'Content-Type: application/json' --data '{"query":"query getLayout($hashId: String!, $revisionId: String!, $geometry: String) {layout(hashId: $hashId, geometry: $geometry, revisionId: $revisionId) {  revision { hashId, qmkVersion, title }}}","variables":{"hashId":"NWALw","geometry":"moonlander","revisionId":"latest"}}' | jq '.data.layout.revision | [.hashId, .qmkVersion, .title]')
 hash_id=$(echo "${response}" | jq -r '.[0]')
 firmware_version=$(printf "%.0f" $(echo "${response}" | jq -r '.[1]'))
 change_description=$(echo "${response}" | jq -r '.[2]')
