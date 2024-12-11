@@ -8,7 +8,7 @@ git commit -a -m "some local changes" || echo "No new local changes"
 git push
 
 # set layout id and geometry - modify here to be default
-layout_id="MWQRK"
+layout_id="NWALw"
 layout_geometry="moonlander"
 
 # checkout oryx branch of repo to pull changes into
@@ -68,7 +68,7 @@ fi
 
 # just skip symlinking so it doesn't recompile each time
 # forcibly symlink the folder so my changes actually make it through the copy
-# ln -sf "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
+ln -sf "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
 
 # Build the layout
 # qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y
