@@ -73,7 +73,7 @@ const uint16_t PROGMEM combo18[] = { KC_K, KC_H, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, KC_BSPC),
     COMBO(combo1, KC_DELETE),
-    COMBO(combo2, TO(1)),
+    COMBO(combo2, TG(1)),
     COMBO(combo3, KC_LPRN),
     COMBO(combo4, KC_LCBR),
     COMBO(combo5, KC_LBRC),
