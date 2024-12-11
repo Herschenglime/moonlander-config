@@ -22,11 +22,6 @@
 #define LAYER_STATE_8BIT
 #define COMBO_COUNT 19
 
-// handle tri layer stuff
-#define TRI_LAYER_LOWER_LAYER 2
-#define TRI_LAYER_UPPER_LAYER 3
-#define TRI_LAYER_ADJUST_LAYER 4
-
 #define RGB_MATRIX_STARTUP_SPD 60
 
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS
