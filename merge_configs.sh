@@ -81,4 +81,4 @@ echo built_layout_file="$built_layout_file"
 echo normalized_layout_geometry=${normalized_layout_geometry}
 
 # flash with wally
-wally-cli $built_layout_file
+wally-cli "$HOME/qmk_firmware/zsa_moonlander_${layout_id}"

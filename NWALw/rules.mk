@@ -9,3 +9,8 @@ RGB_MATRIX_CUSTOM_KB = yes
 SPACE_CADET_ENABLE = no
 CAPS_WORD_ENABLE = yes
 COMBO_ENABLE = yes
+
+# add callum swapper feature
+SRC += features/swapper.c
+
+AUDIO_ENABLE = yes
