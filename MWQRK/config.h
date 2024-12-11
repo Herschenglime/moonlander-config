@@ -11,6 +11,8 @@
 #define PERMISSIVE_HOLD
 
 #define COMBO_TERM 25
+// let combos fire from every layer
+#define COMBO_ONLY_FROM_LAYER 0
 
 #undef RGB_MATRIX_TIMEOUT
 #define RGB_MATRIX_TIMEOUT 300000
