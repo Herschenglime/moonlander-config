@@ -76,9 +76,9 @@ qmk compile -kb ${make_prefix}${layout_geometry} -km ${layout_id}
 
 # Find and export built layout
 normalized_layout_geometry="$(echo "${layout_geometry}" | sed 's/\//_/g')"
-built_layout_file=$(find ~/qmk_firmware -maxdepth 1 -type f -regex ".*${normalized_layout_geometry}.*\.\(bin\|hex\)$")
+built_layout_file="$HOME/qmk_firmware/zsa_moonlander_${layout_id}.bin"
 echo built_layout_file="$built_layout_file"
 echo normalized_layout_geometry=${normalized_layout_geometry}
 
 # flash with wally
-wally-cli "$HOME/qmk_firmware/zsa_moonlander_${layout_id}"
+wally-cli "${built_layout_file}"
