@@ -66,8 +66,9 @@ else
   make_prefix=""
 fi
 
+# just skip symlinking so it doesn't recompile each time
 # forcibly symlink the folder so my changes actually make it through the copy
-ln -sf "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
+# ln -sf "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
 
 # Build the layout
 # qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y

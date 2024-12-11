@@ -13,6 +13,8 @@
 #define COMBO_TERM 25
 // let combos fire from every layer
 #define COMBO_ONLY_FROM_LAYER 0
+// let me filter out certain combos
+#define COMBO_SHOULD_TRIGGER
 
 #undef RGB_MATRIX_TIMEOUT
 #define RGB_MATRIX_TIMEOUT 300000
