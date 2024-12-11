@@ -66,13 +66,8 @@ else
   make_prefix=""
 fi
 
-# Copy layout files to the qmk folder, overwriting if present (make builds quicker)
-# don't replace whole directory so make is quicker
-# rm -rf ${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}
-mkdir -p ${keyboard_directory}/${layout_geometry}/keymaps && cp -r ${layout_path}/* "$_"
-
 # forcibly symlink the folder so my changes actually make it through the copy
-ln -sf $(readlink -f $layout_path) ${keyboard_directory}/${layout_geometry}/keymaps/${layout_path}
+ln -sf "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}"
 
 # Build the layout
 # qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y
