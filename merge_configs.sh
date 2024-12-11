@@ -71,6 +71,9 @@ fi
 # rm -rf ${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}
 mkdir -p ${keyboard_directory}/${layout_geometry}/keymaps && cp -r ${layout_path}/* "$_"
 
+# forcibly symlink the folder so my changes actually make it through the copy
+ln -sf $(readlink -f $layout_path) ${keyboard_directory}/${layout_geometry}/keymaps/${layout_path}
+
 # Build the layout
 # qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y
 qmk compile -kb ${make_prefix}${layout_geometry} -km ${layout_id}
