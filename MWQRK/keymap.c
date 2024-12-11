@@ -209,3 +209,38 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     // Other combos...
   }
 }
+
+// disable combos that interfere with mods in layers to enable chording
+//https://docs.qmk.fm/#/feature_combo?id=generic-hook-to-disallow-a-combo-activation
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+
+  // disable home row combos on left in sym layer
+  if (layer_state_is(NAV)) {
+    switch (combo_index) {
+      case 0:
+      case 3:
+        return false;
+    }
+  }
+  else if (layer_state_is(SYM)) {
+    switch (combo_index) {
+      case 6:
+      case 9:
+        return false;
+    }
+  }
+
+  // both sides have home row mods, do not fire any of them
+  else if (layer_state_is(NUM)) {
+    switch (combo_index) {
+      case 0:
+      case 3:
+      case 6:
+      case 9:
+        return false;
+    }
+  }
+
+  // otherwise let the combo pass
+  return true;
+}
