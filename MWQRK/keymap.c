@@ -201,3 +201,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, SYM, NAV, NUM);
 }
+
+//caps word combo
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case 16:
+      if (pressed) {
+        caps_word_toggle();  // Activate Caps Word!
+      }
+      break;
+
+    // Other combos...
+  }
+}
