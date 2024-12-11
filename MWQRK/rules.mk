@@ -13,3 +13,4 @@ COMBO_ENABLE = yes
 SRC += features/swapper.c
 
 AUDIO_ENABLE = yes
+TRI_LAYER_ENABLE = yes
