@@ -67,7 +67,7 @@ else
 fi
 
 # forcibly symlink the folder so my changes actually make it through the copy
-ln -sf "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}"
+ln -sf "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
 
 # Build the layout
 # qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y
