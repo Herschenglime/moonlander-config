@@ -222,6 +222,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
     switch (combo_index) {
       case 0:
       case 3:
+      case 19:
         return false;
     }
   }
