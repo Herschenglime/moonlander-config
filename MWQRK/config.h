@@ -3,8 +3,10 @@
   See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
 */
 
+#define ONESHOT_TAP_TOGGLE 2
+
 #undef ONESHOT_TIMEOUT
-#define ONESHOT_TIMEOUT 400
+#define ONESHOT_TIMEOUT 500
 
 #define PERMISSIVE_HOLD
 
@@ -16,7 +18,7 @@
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define AUTO_SHIFT_TIMEOUT 140
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "MWQRK/zjQ6J"
+#define SERIAL_NUMBER "MWQRK/BBraO"
 #define LAYER_STATE_8BIT
 #define COMBO_COUNT 19
 
