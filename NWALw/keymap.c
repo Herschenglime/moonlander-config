@@ -26,7 +26,7 @@ enum layer_names {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
-    KC_INSERT,      KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           MT(MOD_RALT, KC_CAPS),                                MT(MOD_RALT, KC_CAPS),KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_PSCR,        
+    KC_PSCR,        KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           MT(MOD_RALT, KC_CAPS),                                MT(MOD_RALT, KC_CAPS),KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_INSERT,      
     KC_TRANSPARENT, KC_Q,           KC_W,           KC_F,           KC_P,           KC_B,           CW_TOGG,                                        CW_TOGG,        KC_J,           KC_L,           KC_U,           KC_Y,           KC_SCLN,        KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_A,           KC_R,           KC_S,           KC_T,           KC_G,           KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_M,           KC_N,           KC_E,           KC_I,           KC_O,           KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_Z,           KC_X,           KC_C,           KC_D,           KC_V,                                           KC_K,           KC_H,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_TRANSPARENT, 
