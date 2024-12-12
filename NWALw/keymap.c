@@ -23,8 +23,8 @@ enum layer_names {
   NUM
 };
 
-const key_override_t prev_track_override = ko_make_basic(MOD_MASK_CONTROL, KC_AUDIO_VOL_DOWN, KC_MEDIA_PREV_TRACK);
-const key_override_t next_track_override = ko_make_basic(MOD_MASK_CONTROL, KC_AUDIO_VOL_UP, KC_MEDIA_NEXT_TRACK);
+const key_override_t prev_track_override = ko_make_basic(MOD_MASK_CTRL, KC_AUDIO_VOL_DOWN, KC_MEDIA_PREV_TRACK);
+const key_override_t next_track_override = ko_make_basic(MOD_MASK_CTRL, KC_AUDIO_VOL_UP, KC_MEDIA_NEXT_TRACK);
 
 // This globally defines all key overrides to be used
 const key_override_t *key_overrides[] = {
