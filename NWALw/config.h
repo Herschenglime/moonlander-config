@@ -16,6 +16,11 @@
 // let me filter out certain combos
 #define COMBO_SHOULD_TRIGGER
 
+// tri layer stuff - nav + sym makes num
+#define TRI_LAYER_LOWER_LAYER 2
+#define TRI_LAYER_UPPER_LAYER 3
+#define TRI_LAYER_ADJUST_LAYER 4
+
 #undef RGB_MATRIX_TIMEOUT
 #define RGB_MATRIX_TIMEOUT 300000
 
