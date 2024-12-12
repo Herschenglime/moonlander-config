@@ -17,3 +17,5 @@ AUDIO_ENABLE = yes
 
 # tri layer support since the oryx version is kinda mid
 TRI_LAYER_ENABLE = yes
+
+KEY_OVERRIDE_ENABLE = yes
