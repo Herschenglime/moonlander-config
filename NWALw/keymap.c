@@ -217,6 +217,12 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 //https://docs.qmk.fm/#/feature_combo?id=generic-hook-to-disallow-a-combo-activation
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
 
+
+  // since num is a combination of the below layers, catch this before disabling combos
+  if (layer_state_is(NUM)) {
+    return true;
+  }
+
   // disable home row combos on left in sym layer
   if (layer_state_is(NAV)) {
     switch (combo_index) {
@@ -248,3 +254,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
   // otherwise let the combo pass
   return true;
 }
+
+
+// 
