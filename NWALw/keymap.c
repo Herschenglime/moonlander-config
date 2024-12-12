@@ -30,7 +30,7 @@ const key_override_t next_track_override = ko_make_basic(MOD_MASK_CTRL, KC_AUDIO
 // This globally defines all key overrides to be used
 const key_override_t *key_overrides[] = {
 	&prev_track_override,
-  &next_track_override,
+  &next_track_override
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
