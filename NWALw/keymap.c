@@ -157,6 +157,37 @@ void set_layer_color(int layer) {
   }
 }
 
+
+// boolean to determine whether a oneshot is pressed
+// will expand into a struct later to handle all the oneshot state stuff
+bool oneshot_pressed = false;
+
+// use oneshots to get indicators, so
+// try mvp test of lighting a key red when any oneshot mod is active
+// handle lighting in lighting callback bud!
+void oneshot_mods_changed_user(uint8_t mods) {
+    /* if (mods & MOD_MASK_SHIFT) { */
+    /*   println("Oneshot mods SHIFT"); */
+    /* } */
+    /* if (mods & MOD_MASK_CTRL) { */
+    /*   println("Oneshot mods CTRL"); */
+    /* } */
+    /* if (mods & MOD_MASK_ALT) { */
+    /*   println("Oneshot mods ALT"); */
+    /* } */
+    /* if (mods & MOD_MASK_GUI) { */
+    /*   println("Oneshot mods GUI"); */
+    /* } */
+
+    // if nonzero (ie a mod pressed), set var to light key accordingly
+    if (mods) {
+        oneshot_pressed = true;
+    }
+    if (!mods) {
+        oneshot_pressed = false;
+    }
+}
+
 bool rgb_matrix_indicators_user(void) {
   if (rawhid_state.rgb_control) {
       return false;
@@ -179,6 +210,11 @@ bool rgb_matrix_indicators_user(void) {
     if (rgb_matrix_get_flags() == LED_FLAG_NONE)
       rgb_matrix_set_color_all(0, 0, 0);
     break;
+  }
+
+  // light an arbitrary key red if oneshot is pressed
+  if (oneshot_pressed) {
+      rgb_matrix_set_color(0, RGB_RED);
   }
   return true;
 }
