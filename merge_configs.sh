@@ -59,10 +59,10 @@ git push
 # Build the layout
 # Set keyboard directory and make prefix based on firmware version
 if [ "${firmware_version}" -ge 24 ]; then
-  keyboard_directory="$HOME/qmk_firmware/keyboards/zsa"
+  keyboard_directory="$HOME/dev/qmk_firmware/keyboards/zsa"
   make_prefix="zsa/"
 else
-  keyboard_directory="$HOME/qmk_firmware/keyboards"
+  keyboard_directory="$HOME/dev/qmk_firmware/keyboards"
   make_prefix=""
 fi
 
