@@ -68,7 +68,13 @@ fi
 
 # just skip symlinking so it doesn't recompile each time
 # forcibly symlink the folder so my changes actually make it through the copy
-ln -sf "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
+# ln -sf "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
+
+# use rsync to copy folder directly so edits can be carried out in qmk_firmware
+# with proper lsp support
+#
+# sync moonlander-config keymap to qmk_firmware
+rsync -rauv "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
 
 # Build the layout
 # qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y
@@ -76,7 +82,7 @@ qmk compile -kb ${make_prefix}${layout_geometry} -km ${layout_id}
 
 # Find and export built layout
 normalized_layout_geometry="$(echo "${layout_geometry}" | sed 's/\//_/g')"
-built_layout_file="$HOME/qmk_firmware/zsa_moonlander_${layout_id}.bin"
+built_layout_file="$HOME/dev/qmk_firmware/zsa_moonlander_${layout_id}.bin"
 echo built_layout_file="$built_layout_file"
 echo normalized_layout_geometry=${normalized_layout_geometry}
 
