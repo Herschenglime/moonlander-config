@@ -17,6 +17,7 @@ make_prefix="zsa/"
 # get any code changes from qmk_firmware
 
 # sync qmk_firmware keymap to moonlander-config
+echo "Getting ${layout_id} from qmk_firmware"
 rsync -rauv "${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}/" "$(readlink -f $layout_path)"
 
 # commit unstaged changes right away to streamline dev process
@@ -79,6 +80,7 @@ git push
 
 
 # sync moonlander-config keymap to qmk_firmware
+echo "Sending ${layout_id} to qmk_firmware"
 rsync -rauv "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
 
 # Build the layout
