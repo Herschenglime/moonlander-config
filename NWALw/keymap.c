@@ -1,6 +1,8 @@
 #include "action_util.h"
+#include "audio.h"
 #include "color.h"
-#include "modifiers.h"
+#include "keyboard.h"
+#include "timer.h"
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "features/swapper.h"
@@ -235,8 +237,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       &sw_wspc_active, KC_LGUI, KC_TAB, SW_WSPC_FWD, SW_WSPC_BACK, KC_LSFT,
       keycode, record
   );
-  switch (keycode) {
 
+  switch (keycode) {
     case RGB_SLD:
         if (rawhid_state.rgb_control) {
             return false;
@@ -305,3 +307,34 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 }
 
 
+// manually create tri-layer with oneshot keys
+// https://docs.qmk.fm/ref_functions#update-tri-layer-state-state-x-y-z
+// bug - doesn't work after each one-shot is pressed, will have to debug or manually config
+layer_state_t layer_state_set_user(layer_state_t state) {
+    return update_tri_layer_state(state, NAV, SYM, NUM);
+}
+
+
+// oneshot mod timer
+static uint16_t osl_timer = 0;
+
+// use oneshot mod callback such that if a mod is pressed, starts a 40 second timer, after which will kill the oneshot layer
+void oneshot_mods_changed_user(uint8_t mods) {
+    // if a mod is pressed, start the timer to clear the oneshot layer
+    if (mods) {
+        osl_timer = timer_read();
+    }
+}
+
+// check timer state if in oneshot layer so it can be disabled if needed
+// could affect performance, monitor afterwards
+void housekeeping_task_user() {
+    if (is_oneshot_layer_active() &&
+        osl_timer != 0 &&
+        // use the same amount of time as combo so it feels natural to hit modifiers at the same time
+        timer_elapsed(osl_timer) > COMBO_TERM) {
+        // clear example: https://github.com/qmk/qmk_firmware/blob/58807b02887c116a22f860cd80d5b94ddd77122b/keyboards/handwired/ortho5x14/keymaps/2u/keymap.c#L561
+        clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+        osl_timer = 0;
+    }
+}
