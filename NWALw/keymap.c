@@ -1,8 +1,4 @@
 #include "action_util.h"
-#include "audio.h"
-#include "color.h"
-#include "keyboard.h"
-#include "timer.h"
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "features/swapper.h"
@@ -189,6 +185,33 @@ void light_mods(uint8_t mods, uint8_t r, uint8_t g, uint8_t b) {
     }
 }
 
+void light_layers(uint8_t layer, uint8_t r, uint8_t g, uint8_t b) {
+    // get matrix positions with `qmk info -kb zsa/moonlander -m`
+    // also in keyboard.json
+    // light the key of active osl blue
+    if (layer == NAV) {
+      rgb_matrix_set_color(LED_4E, r, g, b);
+    }
+    if (layer == SYM) {
+      rgb_matrix_set_color(LED_AC, r, g, b);
+    }
+}
+
+void light_locked_layers(uint8_t layer, uint8_t r, uint8_t g, uint8_t b) {
+    // get matrix positions with `qmk info -kb zsa/moonlander -m`
+    // also in keyboard.json
+    // since no explicit "get_locked_state", manually query layer state
+    if (get_oneshot_layer_state() == ONESHOT_TOGGLED) {
+        if (layer == NAV) {
+            rgb_matrix_set_color(LED_4E, r, g, b);
+        }
+        if (layer == SYM) {
+            rgb_matrix_set_color(LED_AC, r, g, b);
+        }
+    }
+}
+
+
 bool rgb_matrix_indicators_user(void) {
   if (rawhid_state.rgb_control) {
       return false;
@@ -218,6 +241,12 @@ bool rgb_matrix_indicators_user(void) {
 
   // red is locked oneshots
   light_mods(get_oneshot_locked_mods(), RGB_RED);
+
+  // blue is osl, red is locked osl
+  light_layers(get_oneshot_layer(), RGB_BLUE);
+
+  // typedef enum { ONESHOT_PRESSED = 0b01, ONESHOT_OTHER_KEY_PRESSED = 0b10, ONESHOT_START = 0b11, ONESHOT_TOGGLED = 0b100 } oneshot_fullfillment_t;
+  light_locked_layers(get_oneshot_layer(), RGB_RED);
 
   return true;
 }
