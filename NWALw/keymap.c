@@ -1,10 +1,12 @@
+#include "action_util.h"
+#include "color.h"
+#include "modifiers.h"
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "features/swapper.h"
+#include "features/led_positions.h"
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
-
-//test comment
 
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
@@ -159,34 +161,29 @@ void set_layer_color(int layer) {
   }
 }
 
-
-// boolean to determine whether a oneshot is pressed
-// will expand into a struct later to handle all the oneshot state stuff
-bool oneshot_pressed = false;
-
-// use oneshots to get indicators, so
-// try mvp test of lighting a key red when any oneshot mod is active
-// handle lighting in lighting callback bud!
-void oneshot_mods_changed_user(uint8_t mods) {
-    /* if (mods & MOD_MASK_SHIFT) { */
-    /*   println("Oneshot mods SHIFT"); */
-    /* } */
-    /* if (mods & MOD_MASK_CTRL) { */
-    /*   println("Oneshot mods CTRL"); */
-    /* } */
-    /* if (mods & MOD_MASK_ALT) { */
-    /*   println("Oneshot mods ALT"); */
-    /* } */
-    /* if (mods & MOD_MASK_GUI) { */
-    /*   println("Oneshot mods GUI"); */
-    /* } */
-
-    // if nonzero (ie a mod pressed), set var to light key accordingly
-    if (mods) {
-        oneshot_pressed = true;
+// light keys based on active oneshot mods
+void light_mods(uint8_t mods, uint8_t r, uint8_t g, uint8_t b) {
+    // get matrix positions with `qmk info -kb zsa/moonlander -m`
+    // also in keyboard.json
+    if (mods & MOD_BIT_LCTRL) {
+      // should light left and right home key
+      rgb_matrix_set_color(LED_2E, r, g, b);
+      rgb_matrix_set_color(LED_8C, r, g, b);
     }
-    if (!mods) {
-        oneshot_pressed = false;
+    if (mods & MOD_BIT_LSHIFT) {
+      // should light left and right home key
+      rgb_matrix_set_color(LED_2D, r, g, b);
+      rgb_matrix_set_color(LED_8D, r, g, b);
+    }
+    if (mods & MOD_BIT_LGUI) {
+      // should light left and right home key
+      rgb_matrix_set_color(LED_2C, r, g, b);
+      rgb_matrix_set_color(LED_8E, r, g, b);
+    }
+    if (mods & MOD_BIT_LALT) {
+      // should light left and right home key
+      rgb_matrix_set_color(LED_2B, r, g, b);
+      rgb_matrix_set_color(LED_8F, r, g, b);
     }
 }
 
@@ -214,10 +211,12 @@ bool rgb_matrix_indicators_user(void) {
     break;
   }
 
-  // light an arbitrary key red if oneshot is pressed
-  if (oneshot_pressed) {
-      rgb_matrix_set_color(0, RGB_RED);
-  }
+  // blue is oneshots
+  light_mods(get_oneshot_mods(), RGB_BLUE);
+
+  // red is locked oneshots
+  light_mods(get_oneshot_locked_mods(), RGB_RED);
+
   return true;
 }
 
