@@ -1,4 +1,3 @@
-#include "action_util.h"
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "features/swapper.h"
@@ -113,7 +112,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo8, KC_RBRC),
     COMBO(combo9, KC_QUOTE),
     COMBO(combo10, KC_DQUO),
-    COMBO(combo11, KC_PIPE),
+    COMBO(combo11, KC_BSLS),
     COMBO(combo12, KC_MINUS),
     COMBO(combo13, KC_EQUAL),
     COMBO(combo14, LGUI(KC_ENTER)),
@@ -316,20 +315,10 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
     switch (combo_index) {
       case 6:
       case 9:
+      case 14:
         return false;
     }
   }
-
-  // num layer had mods removed, so this is unneeded (for now)
-  /* else if (layer_state_is(NUM)) { */
-  /*   switch (combo_index) { */
-  /*     case 0: */
-  /*     case 3: */
-  /*     case 6: */
-  /*     case 9: */
-  /*       return false; */
-  /*   } */
-  /* } */
 
   // otherwise let the combo pass
   return true;
@@ -355,15 +344,44 @@ void oneshot_mods_changed_user(uint8_t mods) {
     }
 }
 
+
+static uint8_t OSL_MOD_TIMEOUT = 40;
 // check timer state if in oneshot layer so it can be disabled if needed
 // could affect performance, monitor afterwards
 void housekeeping_task_user() {
     if (is_oneshot_layer_active() &&
         osl_timer != 0 &&
         // use the same amount of time as combo so it feels natural to hit modifiers at the same time
-        timer_elapsed(osl_timer) > COMBO_TERM) {
+        timer_elapsed(osl_timer) > OSL_MOD_TIMEOUT) {
         // clear example: https://github.com/qmk/qmk_firmware/blob/58807b02887c116a22f860cd80d5b94ddd77122b/keyboards/handwired/ortho5x14/keymaps/2u/keymap.c#L561
         clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
         osl_timer = 0;
     }
 }
+
+/* // TODO: fiddle with layer states so that the num layer properly stacks when trig'd as oneshot */
+
+/* uint8_t last_osl = 0; */
+
+/* // if you get notified to change into the next layer while a oneshot layer is already active, go to sym layer instead */
+/* void oneshot_layer_changed_user(uint8_t layer) { */
+/*     // layer debug doesn't work so just call function guts directly */
+/*     printf("oneshot layer is %d\n", layer); */
+/*     printf("last layer is %d\n", last_osl); */
+
+/*   // if get 0, clear the last layer state as it probably wasn't on anymore */
+/*   if (layer == 0) { */
+/*       println("layer turned off"); */
+/*       last_osl = 0; */
+/*   } else { */
+/*       last_osl = layer; */
+/*       // account for sym and nav or sym and nav */
+/*       if (last_osl != layer) { */
+/*           // manually switch to num layer */
+/*           set_oneshot_layer(NUM, ONESHOT_START); */
+/*       } */
+/*   } */
+
+/* } */
+
+/* // maybe keep track of last layer to see if it's cleared before the next goes up? */
