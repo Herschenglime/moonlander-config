@@ -83,7 +83,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo8, KC_RBRC),
     COMBO(combo9, KC_QUOTE),
     COMBO(combo10, KC_DQUO),
-    COMBO(combo11, KC_PIPE),
+    COMBO(combo11, KC_BSLS),
     COMBO(combo12, KC_MINUS),
     COMBO(combo13, KC_EQUAL),
     COMBO(combo14, LGUI(KC_ENTER)),
