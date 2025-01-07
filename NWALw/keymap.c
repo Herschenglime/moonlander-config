@@ -19,7 +19,7 @@ enum custom_keycodes {
 // define layer names separately from oryx for easier use in code
 enum layer_names {
   MAIN,
-  QWERTY,
+  GAMING,
   NAV,
   SYM,
   NUM
@@ -329,6 +329,12 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 // https://docs.qmk.fm/ref_functions#update-tri-layer-state-state-x-y-z
 // bug - doesn't work after each one-shot is pressed, will have to debug or manually config
 layer_state_t layer_state_set_user(layer_state_t state) {
+    // check for autoshift so it can be disabled on gaming layer
+    if ((state & (1 << GAMING))) {
+        autoshift_disable();
+    } else {
+        autoshift_enable();
+    }
     return update_tri_layer_state(state, NAV, SYM, NUM);
 }
 // might interfere with other key thing, comment for now
