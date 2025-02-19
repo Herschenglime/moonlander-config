@@ -1,4 +1,4 @@
-#! env bash
+#!env bash
 set -e # exit on error instead of continuing
 
 # turn this into a nix thing later if I get a ton of time - would fix the annoyances of shell script and skip the need for docker
