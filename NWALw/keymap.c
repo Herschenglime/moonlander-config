@@ -94,7 +94,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo17, KC_UNDS),
     COMBO(combo18, KC_PLUS),
     COMBO(combo19, KC_LEFT_GUI),
-    COMBO(combo20, LGUI(KC_TAB)),
+    COMBO(combo20, LALT(KC_TAB)),
     COMBO(combo21, LGUI(KC_TAB)),
 };
 
