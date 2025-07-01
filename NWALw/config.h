@@ -1,8 +1,3 @@
-/*
-  Set any config.h overrides for your specific keymap here.
-  See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
-*/
-
 #define ONESHOT_TAP_TOGGLE 2
 
 #undef ONESHOT_TIMEOUT
@@ -27,9 +22,9 @@
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define AUTO_SHIFT_TIMEOUT 140
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "NWALw/400YK3"
+#define SERIAL_NUMBER "NWALw/NopMRj"
 #define LAYER_STATE_8BIT
-#define COMBO_COUNT 22
+#define COMBO_COUNT 23
 
 #define RGB_MATRIX_STARTUP_SPD 60
 
