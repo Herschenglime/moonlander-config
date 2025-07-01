@@ -1,11 +1,15 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 #define MOON_LED_LEVEL LED_LEVEL
-#define ML_SAFE_RANGE SAFE_RANGE
+#ifndef ZSA_SAFE_RANGE
+#define ZSA_SAFE_RANGE SAFE_RANGE
+#endif
 
 enum custom_keycodes {
-  RGB_SLD = ML_SAFE_RANGE,
+  RGB_SLD = ZSA_SAFE_RANGE,
 };
+
+
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -35,9 +39,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [3] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_F6,          KC_F8,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         
-    KC_TRANSPARENT, KC_ESCAPE,      KC_LBRC,        KC_LCBR,        KC_LPRN,        KC_TILD,        KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_CIRC,        KC_RPRN,        KC_RCBR,        KC_RBRC,        KC_GRAVE,       KC_F12,         
-    KC_TRANSPARENT, KC_SLASH,       KC_ASTR,        KC_MINUS,       KC_PLUS,        KC_DLR,         KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_HASH,        OSM(MOD_LCTL),  OSM(MOD_LSFT),  OSM(MOD_LGUI),  OSM(MOD_LALT),  KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_PLUS,        KC_PIPE,        KC_EQUAL,       KC_ESCAPE,      KC_PERC,                                        KC_TRANSPARENT, KC_TAB,         KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,KC_MEDIA_PLAY_PAUSE,KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_EXLM,        KC_AT,          KC_HASH,        KC_DLR,         KC_PERC,        KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_F12,         
+    KC_TRANSPARENT, KC_SLASH,       KC_ASTR,        KC_MINUS,       KC_PLUS,        KC_BSLS,        KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, OSM(MOD_LCTL),  OSM(MOD_LSFT),  OSM(MOD_LGUI),  OSM(MOD_LALT),  KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_CIRC,        KC_AMPR,        KC_GRAVE,       KC_ESCAPE,      KC_TILD,                                        KC_TRANSPARENT, KC_TAB,         KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,KC_MEDIA_PLAY_PAUSE,KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
@@ -50,6 +54,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
 };
+
+
 const uint16_t PROGMEM combo0[] = { KC_R, KC_S, COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_W, KC_F, COMBO_END};
 const uint16_t PROGMEM combo2[] = { KC_F, KC_R, KC_T, COMBO_END};
@@ -72,6 +78,7 @@ const uint16_t PROGMEM combo18[] = { KC_K, KC_H, COMBO_END};
 const uint16_t PROGMEM combo19[] = { KC_R, KC_S, KC_T, COMBO_END};
 const uint16_t PROGMEM combo20[] = { MT(MOD_LSFT, KC_SPACE), MT(MOD_LCTL, KC_ESCAPE), COMBO_END};
 const uint16_t PROGMEM combo21[] = { MT(MOD_LALT, KC_TAB), MT(MOD_LGUI, KC_ENTER), COMBO_END};
+const uint16_t PROGMEM combo22[] = { KC_X, KC_C, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, KC_BSPC),
@@ -84,8 +91,8 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo7, KC_RCBR),
     COMBO(combo8, KC_RBRC),
     COMBO(combo9, KC_QUOTE),
-    COMBO(combo10, KC_DQUO),
-    COMBO(combo11, KC_BSLS),
+    COMBO(combo10, KC_TAB),
+    COMBO(combo11, KC_DQUO),
     COMBO(combo12, KC_MINUS),
     COMBO(combo13, KC_EQUAL),
     COMBO(combo14, LGUI(KC_ENTER)),
@@ -96,7 +103,9 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo19, KC_LEFT_GUI),
     COMBO(combo20, LALT(KC_TAB)),
     COMBO(combo21, LGUI(KC_TAB)),
+    COMBO(combo22, KC_ESCAPE),
 };
+
 
 extern rgb_config_t rgb_matrix_config;
 
@@ -110,7 +119,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 
     [2] = { {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {117,209,255}, {172,178,255}, {227,245,255}, {0,0,0}, {188,255,255}, {117,209,255}, {172,178,255}, {227,245,255}, {0,0,0}, {188,255,255}, {117,209,255}, {172,178,255}, {227,245,255}, {0,0,0}, {188,255,255}, {117,209,255}, {172,178,255}, {117,209,255}, {0,0,0}, {188,255,255}, {0,0,0}, {0,0,0}, {227,245,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {188,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {227,245,255}, {227,245,255}, {0,0,0}, {0,0,0}, {188,255,255}, {227,245,255}, {227,245,255}, {227,245,255}, {0,0,0}, {188,255,255}, {227,245,255}, {227,245,255}, {227,245,255}, {0,0,0}, {188,255,255}, {227,245,255}, {227,245,255}, {117,209,255}, {0,0,0}, {188,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0} },
 
-    [3] = { {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {16,254,255}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {16,254,255}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {16,254,255}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {117,209,255}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {16,254,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {188,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {16,254,255}, {172,178,255}, {117,209,255}, {0,0,0}, {188,255,255}, {16,254,255}, {172,178,255}, {117,209,255}, {0,0,0}, {188,255,255}, {16,254,255}, {172,178,255}, {117,209,255}, {0,0,0}, {188,255,255}, {16,254,255}, {172,178,255}, {117,209,255}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0} },
+    [3] = { {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {16,254,255}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {16,254,255}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {16,254,255}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {117,209,255}, {0,0,0}, {188,255,255}, {16,254,255}, {16,254,255}, {16,254,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {188,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {0,0,0}, {172,178,255}, {117,209,255}, {0,0,0}, {188,255,255}, {0,0,0}, {172,178,255}, {117,209,255}, {0,0,0}, {188,255,255}, {0,0,0}, {172,178,255}, {117,209,255}, {0,0,0}, {188,255,255}, {0,0,0}, {172,178,255}, {117,209,255}, {0,0,0}, {188,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0} },
 
     [4] = { {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {188,255,255}, {188,255,255}, {188,255,255}, {188,255,255}, {0,0,0}, {188,255,255}, {188,255,255}, {188,255,255}, {188,255,255}, {0,0,0}, {188,255,255}, {188,255,255}, {188,255,255}, {188,255,255}, {0,0,0}, {188,255,255}, {188,255,255}, {188,255,255}, {188,255,255}, {0,0,0}, {188,255,255}, {163,110,255}, {163,110,255}, {0,255,102}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,255,102}, {188,255,255}, {188,255,255}, {0,0,0}, {0,0,0}, {188,255,255}, {163,110,255}, {105,133,220}, {10,252,246}, {0,0,0}, {188,255,255}, {105,133,220}, {105,133,220}, {105,133,220}, {0,0,0}, {188,255,255}, {105,133,220}, {105,133,220}, {105,133,220}, {0,0,0}, {188,255,255}, {105,133,220}, {105,133,220}, {105,133,220}, {0,0,0}, {188,255,255}, {163,110,255}, {163,110,255}, {10,252,246}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0} },
 
@@ -158,6 +167,7 @@ bool rgb_matrix_indicators_user(void) {
   }
   return true;
 }
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
