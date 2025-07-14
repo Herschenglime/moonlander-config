@@ -9,7 +9,6 @@
 
 enum custom_keycodes {
   RGB_SLD = ZSA_SAFE_RANGE,
-};
 
   // from callum swapper
   SW_WIN_FWD,  // Switch to next window         (alt-tab)
