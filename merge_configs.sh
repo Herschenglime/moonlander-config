@@ -6,6 +6,8 @@ set -e # exit on error instead of continuing
 # set layout id and geometry - modify here to be default
 layout_id="NWALw"
 layout_geometry="moonlander"
+# there are now two versions of the moonlander. I have the old one
+revision="reva" 
 
 layout_path="$(pwd)/${layout_id}"
 
@@ -86,11 +88,11 @@ rsync -rauv "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geomet
 # Build the layout
 # qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y
 # now that there's two revisions of the board, specify reva
-qmk compile -kb ${make_prefix}${layout_geometry}/reva -km ${layout_id}
+qmk compile -kb ${make_prefix}${layout_geometry}/${revision} -km ${layout_id}
 
 # Find and export built layout
 normalized_layout_geometry="$(echo "${layout_geometry}" | sed 's/\//_/g')"
-built_layout_file="$HOME/dev/qmk_firmware/zsa_moonlander_${layout_id}.bin"
+built_layout_file="$HOME/dev/qmk_firmware/zsa_moonlander_${revision}_${layout_id}.bin"
 echo built_layout_file="$built_layout_file"
 echo normalized_layout_geometry=${normalized_layout_geometry}
 
