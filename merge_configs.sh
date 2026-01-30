@@ -85,7 +85,8 @@ rsync -rauv "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geomet
 
 # Build the layout
 # qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y
-qmk compile -kb ${make_prefix}${layout_geometry} -km ${layout_id}
+# now that there's two revisions of the board, specify reva
+qmk compile -kb ${make_prefix}${layout_geometry}/reva -km ${layout_id}
 
 # Find and export built layout
 normalized_layout_geometry="$(echo "${layout_geometry}" | sed 's/\//_/g')"
