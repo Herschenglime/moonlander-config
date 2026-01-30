@@ -84,7 +84,7 @@ echo "Sending ${layout_id} to qmk_firmware"
 rsync -rauv "$(readlink -f $layout_path)" "${keyboard_directory}/${layout_geometry}/keymaps/"
 
 # Build the layout
-qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y
+# qmk setup zsa/qmk_firmware -b firmware${firmware_version} -y
 # now that there's two revisions of the board, specify reva
 qmk compile -kb ${make_prefix}${layout_geometry}/reva -km ${layout_id}
 
