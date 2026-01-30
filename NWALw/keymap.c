@@ -33,10 +33,10 @@ const key_override_t next_track_override = ko_make_basic(MOD_MASK_SHIFT, KC_AUDI
 // This globally defines all key overrides to be used
 // different syntax than off the docs, originally wouldn't compile
 // https://www.reddit.com/r/olkb/comments/1gfvz2a/comment/m084xre/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-const key_override_t **key_overrides = (const key_override_t *[]){
-	&prev_track_override,
-  &next_track_override,
-	NULL // Null terminate the array of overrides!
+const key_override_t *key_overrides[] = {
+    &prev_track_override,
+    &next_track_override,
+    NULL // Null terminate the array of overrides!
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
