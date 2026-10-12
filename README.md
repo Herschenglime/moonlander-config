@@ -1,3 +1,10 @@
+# Moonlander Layout
+See the base keymap at https://configure.zsa.io/moonlander/layouts/NWALw/latest/0.
+
+Most of the added features involve extra tri-state layer handling, some fancier combos and exclusions, and layer indicators on the keys themselves.
+
+This repository is based on the exceptional work of the upstream project, [poulainpi/oryx-with-custom-qmk](https://github.com/poulainpi/oryx-with-custom-qmk), but tweaked to compile on a local install of QMK so I don't have to wait for GitHub actions to run every time I make a change - see [merge_configs.sh](./merge_configs.sh) for a (very brittle) local reimplementation of the GitHub actions script. The standard readme from the project is below.
+
 # Oryx with custom QMK
 
 This repository allows combining the convenience of [Oryx’s](https://www.zsa.io/oryx) graphical layout editing with the power of [QMK](https://qmk.fm), allowing you to customize your Oryx layout with advanced QMK features like Achordion and Repeat Key, while automating firmware builds through GitHub Actions.
