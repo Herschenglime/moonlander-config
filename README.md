@@ -1,9 +1,21 @@
 # Moonlander Layout
 See the base keymap at https://configure.zsa.io/moonlander/layouts/NWALw/latest/0.
 
-Most of the added features involve extra tri-state layer handling, some fancier combos and exclusions, and layer indicators on the keys themselves.
+Core features:
+- Colemak-dh layout
+- Home-row mods
+- Limited layering
+- Lots of combos
 
-This repository is based on the exceptional work of the upstream project, [poulainpi/oryx-with-custom-qmk](https://github.com/poulainpi/oryx-with-custom-qmk), but tweaked to compile on a local install of QMK so I don't have to wait for GitHub actions to run every time I make a change - see [merge_configs.sh](./merge_configs.sh) for a (very brittle) local reimplementation of the GitHub actions script. The standard readme from the project is below.
+Most of the added features in the QMK code involve extra tri-state layer handling, some fancier combos and exclusions, and layer indicators on the keys themselves.
+
+This repository is based on the exceptional work of the upstream project, [poulainpi/oryx-with-custom-qmk](https://github.com/poulainpi/oryx-with-custom-qmk), but tweaked to compile on a local install of QMK so I don't have to wait for GitHub actions to run every time I make a change - see [merge_configs.sh](./merge_configs.sh) for a (very brittle) local reimplementation of the GitHub actions script. 
+
+See also: https://github.com/Herschenglime/zmk-config-local
+
+This is a parallel implementation of the layout on my wireless Ferris Sweep in ZMK - most of the core ideas from this layout are present there, and its layering conventions are replicated here to make it easier to switch between them.
+
+The standard readme from the project is below.
 
 # Oryx with custom QMK
 
