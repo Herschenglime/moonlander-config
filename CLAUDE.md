@@ -28,6 +28,18 @@ To compile without touching git or flashing, run this from `~/dev/qmk_firmware`:
 qmk compile -kb zsa/moonlander/reva -km NWALw
 ```
 
+### Windows (WSL2)
+
+Run the script inside WSL2 with `./merge_configs.sh --win` (or `-w`). Everything runs exactly as on Linux except the last step, which flashes with the **Windows** build of ZSA's `zapp` CLI (`zapp.exe`) instead of `wally-cli`, because WSL can't see USB devices. The firmware path is converted with `wslpath -w`. `zapp.exe` must be on the Windows PATH (WSL inherits it), or set `ZAPP_EXE` to its full path. Downloads are at https://github.com/zsa/zapp/releases. Keep both repos in the WSL filesystem (`~/dev`), not under `/mnt/c`.
+
+To set up a new machine (WSL or Linux):
+- Clone this repo and `zsa/qmk_firmware` side by side in `~/dev/`. The script hard-codes `~/dev/qmk_firmware`.
+- In qmk_firmware, check out `firmware25` (or whichever version matches `qmkVersion`) and run `qmk setup zsa/qmk_firmware -b firmware25`.
+- Make sure `qmk`, `rsync`, `jq`, `curl`, `unzip` and git push access to this repo are available.
+- On native Linux, also install `wally-cli` (archived; `zapp` is its replacement).
+
+qmk_firmware ignores keymap folders (`/keyboards/zsa/**/keymaps/**` in its `.gitignore`), so this repo is the only persistent copy of the keymap. The first run of the script on a new machine copies `NWALw/` into qmk_firmware.
+
 `~/dev/qmk_firmware` is ZSA's fork (`zsa/qmk_firmware`), checked out on a `firmwareNN` branch that matches the Oryx `qmkVersion` (currently `firmware25`). The `qmk_firmware` submodule in `.gitmodules` exists only for the CI workflow. Locally, the external checkout is what gets used.
 
 ## Branch model

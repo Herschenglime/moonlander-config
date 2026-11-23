@@ -3,6 +3,16 @@ set -e # exit on error instead of continuing
 
 # turn this into a nix thing later if I get a ton of time - would fix the annoyances of shell script and skip the need for docker
 
+# -w/--win: running in WSL, flash with the windows build of zapp since WSL can't see usb devices
+# override the windows binary with ZAPP_EXE (defaults to zapp.exe on the windows PATH)
+windows=false
+for arg in "$@"; do
+  case "$arg" in
+    -w|--win) windows=true ;;
+    *) echo "unknown argument: $arg" >&2; exit 1 ;;
+  esac
+done
+
 # set layout id and geometry - modify here to be default
 layout_id="NWALw"
 layout_geometry="moonlander"
@@ -19,8 +29,11 @@ make_prefix="zsa/"
 # get any code changes from qmk_firmware
 
 # sync qmk_firmware keymap to moonlander-config
-echo "Getting ${layout_id} from qmk_firmware"
-rsync -rauv "${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}/" "$(readlink -f $layout_path)"
+# (skipped on a fresh machine, where it only exists after the sync back below)
+if [[ -d "${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}" ]]; then
+  echo "Getting ${layout_id} from qmk_firmware"
+  rsync -rauv "${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}/" "$(readlink -f $layout_path)"
+fi
 
 # commit unstaged changes right away to streamline dev process
 git commit -a -m "some local changes" || echo "No new local changes"
@@ -96,5 +109,10 @@ built_layout_file="$HOME/dev/qmk_firmware/zsa_moonlander_${revision}_${layout_id
 echo built_layout_file="$built_layout_file"
 echo normalized_layout_geometry=${normalized_layout_geometry}
 
-# flash with wally
-wally-cli "${built_layout_file}"
+if $windows; then
+  # windows exes run from WSL can read the build through its \\wsl.localhost path
+  "${ZAPP_EXE:-zapp.exe}" flash "$(wslpath -w "${built_layout_file}")"
+else
+  # flash with wally
+  wally-cli "${built_layout_file}"
+fi
