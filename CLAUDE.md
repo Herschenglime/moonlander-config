@@ -34,7 +34,7 @@ Run the script inside WSL2 with `./merge_configs.sh --win` (or `-w`). Everything
 
 To set up a new machine (WSL or Linux):
 - Clone this repo and `zsa/qmk_firmware` side by side in `~/dev/`. The script hard-codes `~/dev/qmk_firmware`.
-- In qmk_firmware, check out `firmware25` (or whichever version matches `qmkVersion`) and run `qmk setup zsa/qmk_firmware -b firmware25`.
+- In qmk_firmware, check out `firmware25` (or whichever version matches `qmkVersion`) and run `qmk setup zsa/qmk_firmware -b firmware25 -H ~/dev/qmk_firmware`. Without `-H`, `qmk setup` clones into `~/qmk_firmware`, not the path the script expects.
 - Make sure `qmk`, `rsync`, `jq`, `curl`, `unzip` and git push access to this repo are available.
 - On native Linux, also install `wally-cli` (archived; `zapp` is its replacement).
 
