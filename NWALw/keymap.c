@@ -281,7 +281,8 @@ bool rgb_matrix_indicators_user(void) {
 bool sw_win_active = false;
 bool sw_wspc_active = false;
 
-
+// set while releasing out of a nav + sym (num) chord
+static bool num_chorded = false;
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -322,6 +323,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             rgblight_mode(1);
         }
         return false;
+
+  // Both OSLs held = NUM. QMK only tracks one one-shot layer, so the first OSL's
+  // layer is orphaned and never turned off. Treat a NUM chord as momentary.
+  case OSL(NAV):
+  case OSL(SYM):
+    if (!record->event.pressed && (layer_state_is(NUM) || num_chorded)) {
+      uint8_t layer = (keycode == OSL(NAV)) ? NAV : SYM;
+      num_chorded = true;
+      layer_off(layer);
+      if (get_oneshot_layer() == layer) {
+        reset_oneshot_layer();
+      }
+      if (!layer_state_is(NAV) && !layer_state_is(SYM)) {
+        num_chorded = false;
+      }
+      return false;  // skip QMK's OSL release handling
+    }
+    break;
   }
   return true;
 }
@@ -341,34 +360,30 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 
 // disable combos that interfere with mods in layers to enable chording
 //https://docs.qmk.fm/#/feature_combo?id=generic-hook-to-disallow-a-combo-activation
-bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+static bool nav_held = false;
+static bool sym_held = false;
 
-
-  // since num is a combination of the below layers, catch this before disabling combos
-  if (layer_state_is(NUM)) {
+bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case OSL(NAV): nav_held = record->event.pressed; break;
+        case OSL(SYM): sym_held = record->event.pressed; break;
+    }
     return true;
-  }
+}
 
-  // disable home row combos on left in sym layer
-  if (layer_state_is(NAV)) {
-    switch (combo_index) {
-      case 0:
-      case 3:
-      case 19:
-        return false;
-    }
-  }
-  else if (layer_state_is(SYM)) {
-    switch (combo_index) {
-      case 6:
-      case 9:
-      case 14:
-        return false;
-    }
-  }
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    bool nav = layer_state_is(NAV) || nav_held;
+    bool sym = layer_state_is(SYM) || sym_held;
 
-  // otherwise let the combo pass
-  return true;
+    if (layer_state_is(NUM) || (nav && sym)) {
+        return true;
+    }
+    if (nav) {
+        switch (combo_index) { case 0: case 3: case 19: return false; }
+    } else if (sym) {
+        switch (combo_index) { case 6: case 9: case 14: return false; }
+    }
+    return true;
 }
 
 
